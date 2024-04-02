@@ -1,0 +1,6189 @@
+openapi: 3.0.0
+paths:
+  /account/me/withdrawal-limit:
+    get:
+      operationId: AccountController_getWithdrawalLimit
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_0
+        - Account
+      security: &ref_1
+        - access-token: []
+  /account/me/loyalty-points-balance:
+    get:
+      operationId: AccountController_getLoyaltyPointsBalance
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_0
+      security: *ref_1
+  /account/me:
+    get:
+      operationId: AccountController_getAccountByEmail
+      parameters: []
+      responses:
+        '200':
+          description: Account Info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountDto'
+      tags: *ref_0
+      security: *ref_1
+    patch:
+      operationId: AccountController_updateAccountByEmail
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountMeDto'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_0
+      security: *ref_1
+  /account:
+    get:
+      operationId: getManyBaseAccountControllerAccountEntity
+      summary: Retrieve multiple AccountEntities
+      parameters:
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: s
+          description: >-
+            Adds search condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#search"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter
+          description: >-
+            Adds filter condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#filter"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: or
+          description: >-
+            Adds OR condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#or"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: sort
+          description: >-
+            Adds sort by field. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#sort"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: limit
+          description: >-
+            Limit amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#limit"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          description: >-
+            Offset amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#offset"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: page
+          description: >-
+            Page portion of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#page"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get paginated response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountGetManyDto'
+      tags: *ref_0
+      security: *ref_1
+    post:
+      operationId: createOneBaseAccountControllerAccountEntity
+      summary: Create a single AccountEntity
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountCreateDto'
+      responses:
+        '201':
+          description: Get create one base response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountDto'
+      tags: *ref_0
+      security: *ref_1
+  /account/{id}:
+    patch:
+      operationId: updateOneBaseAccountControllerAccountEntity
+      summary: Update a single AccountEntity
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountUpdateDto'
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountDto'
+      tags: *ref_0
+      security: *ref_1
+  /account/me/balances:
+    get:
+      operationId: AccountBalanceController_getMe
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_2
+        - Account
+      security: &ref_3
+        - access-token: []
+  /account/{id}/balances:
+    get:
+      operationId: AccountBalanceController_get
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_2
+      security: *ref_3
+  /account/me/transaction:
+    get:
+      operationId: getManyBaseAccountTransactionControllerTransactionEntity
+      summary: Retrieve multiple TransactionEntities
+      parameters:
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: s
+          description: >-
+            Adds search condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#search"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter
+          description: >-
+            Adds filter condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#filter"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: or
+          description: >-
+            Adds OR condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#or"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: sort
+          description: >-
+            Adds sort by field. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#sort"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: limit
+          description: >-
+            Limit amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#limit"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          description: >-
+            Offset amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#offset"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: page
+          description: >-
+            Page portion of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#page"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get paginated response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionGetManyDto'
+      tags:
+        - Account
+      security:
+        - access-token: []
+  /role/sync-roles:
+    post:
+      operationId: RoleController_syncAllRoles
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_4
+        - Role
+      security: &ref_5
+        - access-token: []
+  /role/sync-roles/{userId}:
+    post:
+      operationId: RoleController_syncUserRoles
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_4
+      security: *ref_5
+  /user/me:
+    get:
+      operationId: UserController_getUserByEmail
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_6
+        - Users
+      security: &ref_7
+        - access-token: []
+    patch:
+      operationId: UserController_updateUserByEmail
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateMeDto'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_6
+      security: *ref_7
+  /user/me/notification-preferences:
+    get:
+      operationId: UserController_getUsersNotificationPreferences
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_6
+      security: *ref_7
+  /user/me/photo:
+    post:
+      operationId: UserController_updateUserPhoto
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: ''
+      tags: *ref_6
+      security: *ref_7
+  /user:
+    get:
+      operationId: getManyBaseUserControllerUserEntity
+      summary: Retrieve multiple UserEntities
+      parameters:
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: s
+          description: >-
+            Adds search condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#search"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter
+          description: >-
+            Adds filter condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#filter"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: or
+          description: >-
+            Adds OR condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#or"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: sort
+          description: >-
+            Adds sort by field. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#sort"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: limit
+          description: >-
+            Limit amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#limit"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          description: >-
+            Offset amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#offset"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: page
+          description: >-
+            Page portion of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#page"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get paginated response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGetManyDto'
+      tags: *ref_6
+      security: *ref_7
+    post:
+      operationId: createOneBaseUserControllerUserEntity
+      summary: Create a single UserEntity
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreateDto'
+      responses:
+        '201':
+          description: Get create one base response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+      tags: *ref_6
+      security: *ref_7
+  /user/{id}:
+    get:
+      operationId: getOneBaseUserControllerUserEntity
+      summary: Retrieve a single UserEntity
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get one base response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+      tags: *ref_6
+      security: *ref_7
+    patch:
+      operationId: updateOneBaseUserControllerUserEntity
+      summary: Update a single UserEntity
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateDto'
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+      tags: *ref_6
+      security: *ref_7
+  /user/home/user:
+    get:
+      operationId: UserController_getHomeUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_6
+      security: *ref_7
+  /user/{id}/verify-hard-delete:
+    get:
+      operationId: UserController_hardDeleteVerification
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_6
+      security: *ref_7
+  /user/{id}/hard-delete:
+    delete:
+      operationId: UserController_hardDelete
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_6
+      security: *ref_7
+  /country/allStates:
+    get:
+      operationId: CountryController_getActiveCountriesWithAllStates
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_8
+        - Country
+      security: &ref_9
+        - access-token: []
+  /country/{isoCode}/enabled:
+    patch:
+      operationId: CountryController_setCountryEnabled
+      parameters:
+        - name: isoCode
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CountryStateIsEnabledDto'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_8
+      security: *ref_9
+  /country/{isoCode}/state/{stateCode}/enabled:
+    patch:
+      operationId: CountryController_setStateEnabled
+      parameters:
+        - name: isoCode
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: stateCode
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CountryStateIsEnabledDto'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_8
+      security: *ref_9
+  /country/search/{query}:
+    get:
+      operationId: CountryController_searchStates
+      parameters:
+        - name: query
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: isEnabled
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_8
+      security: *ref_9
+  /country:
+    get:
+      operationId: getManyBaseCountryControllerCountryEntity
+      summary: Retrieve multiple CountryEntities
+      parameters:
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: s
+          description: >-
+            Adds search condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#search"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter
+          description: >-
+            Adds filter condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#filter"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: or
+          description: >-
+            Adds OR condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#or"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: sort
+          description: >-
+            Adds sort by field. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#sort"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: limit
+          description: >-
+            Limit amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#limit"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          description: >-
+            Offset amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#offset"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: page
+          description: >-
+            Page portion of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#page"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get paginated response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountryGetManyDto'
+      tags: *ref_8
+      security: *ref_9
+  /address/autocomplete:
+    get:
+      operationId: AddressController_addressAutocomplete
+      parameters:
+        - name: query
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: &ref_10
+        - Address
+  /address/details/{id}:
+    get:
+      operationId: AddressController_addressDetails
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_10
+  /newsletter/subscribe:
+    post:
+      operationId: NewsletterController_registerToNewsletter
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewsletterSubscriptionDto'
+      responses:
+        '201':
+          description: ''
+      tags: &ref_11
+        - Newsletter
+  /newsletter/webhook/sync:
+    post:
+      operationId: NewsletterController_newsletterSubscriptionDidChangeWebhook
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_11
+    get:
+      operationId: NewsletterController_mailchimpRegisterWebhook
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_11
+  /affiliate:
+    post:
+      operationId: createOneBaseAffiliateControllerAffiliateEntity
+      summary: Create a single AffiliateEntity
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AffiliateCreateDto'
+      responses:
+        '201':
+          description: Get create one base response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffiliateDto'
+      tags: &ref_12
+        - Affiliate
+      security: &ref_13
+        - access-token: []
+    get:
+      operationId: getManyBaseAffiliateControllerAffiliateEntity
+      summary: Retrieve multiple AffiliateEntities
+      parameters:
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: s
+          description: >-
+            Adds search condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#search"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter
+          description: >-
+            Adds filter condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#filter"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: or
+          description: >-
+            Adds OR condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#or"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: sort
+          description: >-
+            Adds sort by field. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#sort"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: limit
+          description: >-
+            Limit amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#limit"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          description: >-
+            Offset amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#offset"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: page
+          description: >-
+            Page portion of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#page"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get paginated response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffiliateGetManyDto'
+      tags: *ref_12
+      security: *ref_13
+  /affiliate/{id}:
+    patch:
+      operationId: updateOneBaseAffiliateControllerAffiliateEntity
+      summary: Update a single AffiliateEntity
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AffiliateUpdateDto'
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffiliateDto'
+      tags: *ref_12
+      security: *ref_13
+    get:
+      operationId: getOneBaseAffiliateControllerAffiliateEntity
+      summary: Retrieve a single AffiliateEntity
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get one base response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffiliateDto'
+      tags: *ref_12
+      security: *ref_13
+  /coupon:
+    get:
+      operationId: getManyBaseCouponControllerCouponEntity
+      summary: Retrieve multiple CouponEntities
+      parameters:
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: s
+          description: >-
+            Adds search condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#search"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter
+          description: >-
+            Adds filter condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#filter"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: or
+          description: >-
+            Adds OR condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#or"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: sort
+          description: >-
+            Adds sort by field. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#sort"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: limit
+          description: >-
+            Limit amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#limit"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          description: >-
+            Offset amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#offset"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: page
+          description: >-
+            Page portion of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#page"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get many base response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CouponGetManyDto'
+      tags: &ref_14
+        - Coupon
+      security: &ref_15
+        - access-token: []
+    post:
+      operationId: createOneBaseCouponControllerCouponEntity
+      summary: Create a single CouponEntity
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CouponCreateDto'
+      responses:
+        '201':
+          description: Get create one base response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CouponEntity'
+        '400':
+          description: Bad Request
+      tags: *ref_14
+      security: *ref_15
+  /coupon/create-many:
+    post:
+      operationId: CouponController_createMany
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CouponCreateManyDto'
+      responses:
+        '201':
+          description: ''
+      tags: *ref_14
+      security: *ref_15
+  /coupon/{id}:
+    patch:
+      operationId: updateOneBaseCouponControllerCouponEntity
+      summary: Update a single CouponEntity
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CouponUpdateDto'
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CouponEntity'
+        '404':
+          description: Not Found
+      tags: *ref_14
+      security: *ref_15
+    delete:
+      operationId: deleteOneBaseCouponControllerCouponEntity
+      summary: Delete a single CouponEntity
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Delete one base response
+        '409':
+          description: Coupon is already deposited
+      tags: *ref_14
+      security: *ref_15
+  /transaction/deposit/coupon:
+    post:
+      operationId: CouponDepositController_initiate
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CouponDepositRequestDto'
+      responses:
+        '201':
+          description: Coupon deposit initiated
+      tags:
+        - Transaction - Deposit
+      security:
+        - access-token: []
+  /transaction/deposit/interac:
+    post:
+      operationId: InteracDepositController_initiate
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InteracDepositRequestDto'
+      responses:
+        '201':
+          description: Interac deposit initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InteracDepositResponseDto'
+      tags: &ref_16
+        - Transaction - Deposit
+      security:
+        - access-token: []
+  /transaction/deposit/interac/callback:
+    post:
+      operationId: InteracDepositController_callback
+      parameters:
+        - name: status
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: transaction
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_16
+  /transaction/deposit/crypto:
+    post:
+      operationId: CryptoDepositController_initiate
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/cryptoDepositRequestDto'
+      responses:
+        '201':
+          description: Crypto deposit initiated
+      tags:
+        - Transaction - Deposit
+      security:
+        - access-token: []
+  /transaction/withdrawal/crypto:
+    post:
+      operationId: CryptoWithdrawalController_initiate
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CryptoWithdrawalRequestDto'
+      responses:
+        '201':
+          description: Crypto withdrawal initiated
+      tags:
+        - Transaction - Withdrawal
+      security:
+        - access-token: []
+  /transaction/credit/setting:
+    get:
+      operationId: CreditSettingController_get
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Transaction - Settings
+  /transaction/{id}/status:
+    patch:
+      operationId: TransactionController_changeStatus
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionUpdateStatusDto'
+      responses:
+        '200':
+          description: ''
+      tags: &ref_17
+        - Transaction
+      security: &ref_18
+        - access-token: []
+  /transaction/adjustment:
+    post:
+      operationId: TransactionController_createAdjustment
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdjustmentRequestDto'
+      responses:
+        '201':
+          description: ''
+      tags: *ref_17
+      security: *ref_18
+  /transaction:
+    get:
+      operationId: getManyBaseTransactionControllerTransactionEntity
+      summary: Retrieve multiple TransactionEntities
+      parameters:
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: s
+          description: >-
+            Adds search condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#search"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter
+          description: >-
+            Adds filter condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#filter"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: or
+          description: >-
+            Adds OR condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#or"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: sort
+          description: >-
+            Adds sort by field. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#sort"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: limit
+          description: >-
+            Limit amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#limit"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          description: >-
+            Offset amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#offset"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: page
+          description: >-
+            Page portion of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#page"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get paginated response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionGetManyDto'
+      tags: *ref_17
+      security: *ref_18
+  /transaction/transfer:
+    post:
+      operationId: TransferController_initiate
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferDto'
+      responses:
+        '201':
+          description: Transfer request initiated
+      tags:
+        - Transaction - Transfer Request
+      security:
+        - access-token: []
+  /retailer/me:
+    get:
+      operationId: RetailerController_getMyRetailer
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_19
+        - Retailer
+      security: &ref_20
+        - access-token: []
+  /retailer:
+    post:
+      operationId: createOneBaseRetailerControllerRetailerEntity
+      summary: Create a single RetailerEntity
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetailerCreateDto'
+      responses:
+        '201':
+          description: Get create one base response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetailerDto'
+      tags: *ref_19
+      security: *ref_20
+    get:
+      operationId: getManyBaseRetailerControllerRetailerEntity
+      summary: Retrieve multiple RetailerEntities
+      parameters:
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: s
+          description: >-
+            Adds search condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#search"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter
+          description: >-
+            Adds filter condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#filter"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: or
+          description: >-
+            Adds OR condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#or"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: sort
+          description: >-
+            Adds sort by field. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#sort"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: limit
+          description: >-
+            Limit amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#limit"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          description: >-
+            Offset amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#offset"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: page
+          description: >-
+            Page portion of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#page"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get paginated response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetailerGetManyDto'
+      tags: *ref_19
+      security: *ref_20
+  /retailer/{id}:
+    patch:
+      operationId: updateOneBaseRetailerControllerRetailerEntity
+      summary: Update a single RetailerEntity
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetailerUpdateDto'
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetailerDto'
+      tags: *ref_19
+      security: *ref_20
+    get:
+      operationId: getOneBaseRetailerControllerRetailerEntity
+      summary: Retrieve a single RetailerEntity
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get one base response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetailerDto'
+      tags: *ref_19
+      security: *ref_20
+  /retailer/{retailerId}/sale:
+    get:
+      operationId: RetailerSaleController_getSales
+      parameters:
+        - name: retailerId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Retailer
+      security:
+        - access-token: []
+  /referral-campaign:
+    post:
+      operationId: createOneBaseReferralCampaignControllerReferralCampaignEntity
+      summary: Create a single ReferralCampaignEntity
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReferralCampaignCreateDto'
+      responses:
+        '201':
+          description: Get create one base response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferralCampaignEntity'
+        '400':
+          description: Bad Request
+      tags: &ref_21
+        - ReferralCampaign
+      security: &ref_22
+        - access-token: []
+    get:
+      operationId: getManyBaseReferralCampaignControllerReferralCampaignEntity
+      summary: Retrieve multiple ReferralCampaignEntities
+      parameters:
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: s
+          description: >-
+            Adds search condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#search"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter
+          description: >-
+            Adds filter condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#filter"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: or
+          description: >-
+            Adds OR condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#or"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: sort
+          description: >-
+            Adds sort by field. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#sort"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: limit
+          description: >-
+            Limit amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#limit"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          description: >-
+            Offset amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#offset"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: page
+          description: >-
+            Page portion of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#page"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get paginated response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferralCampaignDto'
+      tags: *ref_21
+      security: *ref_22
+  /referral-campaign/{id}:
+    patch:
+      operationId: updateOneBaseReferralCampaignControllerReferralCampaignEntity
+      summary: Update a single ReferralCampaignEntity
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReferralCampaignUpdateDto'
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferralCampaignDto'
+        '201':
+          description: Get update one base response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferralCampaignEntity'
+        '400':
+          description: Bad Request
+      tags: *ref_21
+      security: *ref_22
+  /sales-representative:
+    post:
+      operationId: createOneBaseSalesRepControllerSalesRepEntity
+      summary: Create a single SalesRepEntity
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesRepCreateDto'
+      responses:
+        '201':
+          description: Get create one base response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesRepDto'
+      tags: &ref_23
+        - Sales Representative
+      security: &ref_24
+        - access-token: []
+    get:
+      operationId: getManyBaseSalesRepControllerSalesRepEntity
+      summary: Retrieve multiple SalesRepEntities
+      parameters:
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: s
+          description: >-
+            Adds search condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#search"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter
+          description: >-
+            Adds filter condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#filter"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: or
+          description: >-
+            Adds OR condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#or"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: sort
+          description: >-
+            Adds sort by field. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#sort"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: limit
+          description: >-
+            Limit amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#limit"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          description: >-
+            Offset amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#offset"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: page
+          description: >-
+            Page portion of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#page"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get paginated response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesRepGetManyDto'
+      tags: *ref_23
+      security: *ref_24
+  /sales-representative/{id}:
+    patch:
+      operationId: updateOneBaseSalesRepControllerSalesRepEntity
+      summary: Update a single SalesRepEntity
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesRepUpdateDto'
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesRepDto'
+      tags: *ref_23
+      security: *ref_24
+  /objective/retailers/me:
+    get:
+      operationId: ObjectiveController_getRetailerObjective
+      parameters:
+        - name: startDate
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: endDate
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: &ref_25
+        - Objective
+      security: &ref_26
+        - access-token: []
+  /objective/retailers/{id}:
+    get:
+      operationId: ObjectiveController_getRetailerObjectiveById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: startDate
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: endDate
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_25
+      security: *ref_26
+    post:
+      operationId: ObjectiveController_createRetailerObjective
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjectiveCreateDto'
+      responses:
+        '201':
+          description: ''
+      tags: *ref_25
+      security: *ref_26
+  /objective/{id}:
+    patch:
+      operationId: ObjectiveController_updateObjective
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjectiveUpdateDto'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_25
+      security: *ref_26
+    delete:
+      operationId: ObjectiveController_deleteObjective
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_25
+      security: *ref_26
+  /auth/signup:
+    post:
+      operationId: AuthController_signup
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthSignUpDto'
+      responses:
+        '200':
+          description: >-
+            Create a user in SSO and Database; Response contains information
+            about where the verification code is sent (email).
+      tags: &ref_27
+        - Auth
+  /auth/confirm:
+    post:
+      operationId: AuthController_confirm
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthSignUpConfirmationDto'
+      responses:
+        '200':
+          description: Submit the confirmation code received.
+      tags: *ref_27
+  /auth/resend-confirmation:
+    post:
+      operationId: AuthController_resendConfirm
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthSignUpResendConfirmationDto'
+      responses:
+        '200':
+          description: >-
+            Re-trigger the confirmation code message for an account that does
+            not have yet verified their email.
+      tags: *ref_27
+  /auth/me:
+    delete:
+      operationId: AuthController_deleteSelf
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_27
+      security:
+        - access-token: []
+  /auth/login:
+    post:
+      operationId: AuthController_login
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthLoginDto'
+      responses:
+        '200':
+          description: >-
+            Login. Users are required to have 2Fa on signup, so they will have
+            to answer to a login challenge. From the response, keep `Session` id
+            and `ChallengeParameters.SRP_AUTH_USER_ID` to call the
+            `auth/login-challenge` endpoint or auth/token endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthLoginChallengeResponseDto'
+      tags:
+        - Auth
+        - Auth
+  /auth/login/sessions:
+    get:
+      operationId: AuthController_getSessions
+      parameters: []
+      responses:
+        '200':
+          description: Fetch the sessions of the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthLoginChallengeResponseDto'
+      tags: *ref_27
+      security:
+        - access-token: []
+  /auth/token:
+    post:
+      operationId: AuthController_token
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRefreshTokensDto'
+      responses:
+        '200':
+          description: >-
+            Get new tokens. use the ChallengeParameters.SRP_AUTH_USER_ID` in the
+            userId parameter (obtained while doing the login call). If the same
+            refresh token is used more than once, the second time it will only
+            provide the already issued Access and IdToken. The new refresh token
+            is only returned the first time a refresh token is used
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthLoginChallengeResponseDto'
+      tags: *ref_27
+  /auth/login-challenge:
+    post:
+      operationId: AuthController_loginChallenge
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthChallengeResponseDto'
+      responses:
+        '200':
+          description: mfa response
+      tags: *ref_27
+  /auth/new-password-required-challenge:
+    post:
+      operationId: AuthController_newPasswordRequiredChallenge
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthNewPasswordRequiredChallengeDto'
+      responses:
+        '200':
+          description: password changed
+      tags: *ref_27
+  /auth/forgot-password:
+    post:
+      operationId: AuthController_forgotPassword
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthForgotPasswordDto'
+      responses:
+        '200':
+          description: request forgot password flow for user
+      tags: *ref_27
+  /auth/forgot-challenge:
+    post:
+      operationId: AuthController_forgotPasswordChallenge
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthForgotPasswordConfirmationDto'
+      responses:
+        '200':
+          description: >-
+            Complete forgot password flow for user using provided confirmation
+            code (from forgot-password)
+      tags: *ref_27
+  /auth/change-password:
+    post:
+      operationId: AuthController_changePassword
+      parameters:
+        - name: Authorization
+          required: true
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordDto'
+      responses:
+        '200':
+          description: >-
+            change your own password. Use the AccessToken, obtained at the
+            login, in the Authorization header (Bearer [AccessToken]). Using the
+            idToken won't work here
+      tags: *ref_27
+  /auth/global-sign-out:
+    post:
+      operationId: AuthController_globalSignOut
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalSignOutDto'
+      responses:
+        '200':
+          description: >-
+            Request a full sign out. This revokes all access tokens. To avoid
+            user using the platform with is already issued access token, remove
+            it also from the client side and send the client to the login page
+      tags: *ref_27
+  /auth/preferences:
+    post:
+      operationId: AuthController_setPreferences
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthPreferencesDto'
+      responses:
+        '200':
+          description: >-
+            Changes the user's preferences in authentication and user in user
+            entity. You must use this endpoint to have synced information with
+            user preference and token
+      tags: *ref_27
+      security:
+        - access-token: []
+  /auth/preferences/verify-phone:
+    post:
+      operationId: AuthController_verifyPhone
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthPreferencesVerifyPhoneDto'
+      responses:
+        '200':
+          description: Use a verification code to verify the user phone
+      tags: *ref_27
+      security:
+        - access-token: []
+  /auth/admin/reset-password:
+    post:
+      operationId: AuthController_resetUserPassword
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminResetPasswordDto'
+      responses:
+        '200':
+          description: Allow admin to reset user password
+      tags: *ref_27
+      security:
+        - access-token: []
+  /sale:
+    get:
+      operationId: SaleController_getSales
+      parameters:
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: statuses
+          required: true
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - name: types
+          required: true
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - name: retailerId
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Sales
+      security:
+        - access-token: []
+  /game/{name}/participation-cost:
+    get:
+      operationId: GameController_getGameParticipationCost
+      parameters:
+        - name: name
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: &ref_28
+        - Game
+  /game/{name}/configuration:
+    get:
+      operationId: GameController_getGameConfiguration
+      parameters:
+        - name: name
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_28
+      security:
+        - access-token: []
+    patch:
+      operationId: GameController_updateGameConfiguration
+      parameters:
+        - name: name
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameConfigurationUpdateDto'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_28
+      security:
+        - access-token: []
+  /game/draw/execute:
+    get:
+      operationId: GameDrawController_executeDraws
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_29
+        - Game
+      security:
+        - access-token: []
+  /game/{name}/draw/results:
+    get:
+      operationId: GameDrawController_getGameResults
+      parameters:
+        - name: name
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: fromDate
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: toDate
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_29
+  /game/{name}/draws:
+    get:
+      operationId: GameDrawController_getGameResultsAdmin
+      parameters:
+        - name: name
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_29
+      security:
+        - access-token: []
+  /game/futureDraw/{id}:
+    get:
+      operationId: GameDrawController_getFutureDrawStats
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_29
+      security:
+        - access-token: []
+  /game/{name}/draw/next:
+    get:
+      operationId: GameDrawController_getNextDraws
+      parameters:
+        - name: name
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_29
+  /game/{name}/extra-stats:
+    get:
+      operationId: GameDrawController_getNextDrawBluballStats
+      parameters:
+        - name: bluball
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_29
+  /game/draws/account/{id}:
+    get:
+      operationId: GameDrawController_getAccountDraws
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: startDate
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: endDate
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_29
+      security:
+        - access-token: []
+  /participation:
+    post:
+      operationId: ParticipationController_createOne
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParticipationCreateDto'
+      responses:
+        '200':
+          description: ''
+      tags: &ref_30
+        - Game
+      security:
+        - access-token: []
+  /participation/free:
+    post:
+      operationId: ParticipationController_createFreeOne
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FreeParticipationDepositDto'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_30
+      security:
+        - access-token: []
+  /participation/reserve-combination:
+    post:
+      operationId: ParticipationController_generateAndReserveCombination
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservedCombinationCreateDto'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_30
+  /participation/{id}/info:
+    get:
+      operationId: ParticipationController_getInfo
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_30
+  /participation-combination:
+    get:
+      operationId: >-
+        getManyBaseParticipationCombinationControllerParticipationCombinationEntity
+      summary: Retrieve multiple ParticipationCombinationEntities
+      parameters:
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: s
+          description: >-
+            Adds search condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#search"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter
+          description: >-
+            Adds filter condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#filter"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: or
+          description: >-
+            Adds OR condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#or"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: sort
+          description: >-
+            Adds sort by field. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#sort"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: limit
+          description: >-
+            Limit amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#limit"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          description: >-
+            Offset amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#offset"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: page
+          description: >-
+            Page portion of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#page"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get paginated response
+          content:
+            application/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/GetManyParticipationCombinationEntityResponseDto
+      tags:
+        - Game
+      security:
+        - access-token: []
+  /free-participation:
+    get:
+      operationId: getManyBaseFreeParticipationControllerFreeParticipationEntity
+      summary: Retrieve multiple FreeParticipationEntities
+      parameters:
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: s
+          description: >-
+            Adds search condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#search"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter
+          description: >-
+            Adds filter condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#filter"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: or
+          description: >-
+            Adds OR condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#or"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: sort
+          description: >-
+            Adds sort by field. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#sort"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: limit
+          description: >-
+            Limit amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#limit"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          description: >-
+            Offset amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#offset"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: page
+          description: >-
+            Page portion of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#page"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get many base response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FreeParticipationGetManyDto'
+      tags: &ref_31
+        - FreeParticipation
+      security: &ref_32
+        - access-token: []
+    post:
+      operationId: createOneBaseFreeParticipationControllerFreeParticipationEntity
+      summary: Create a single FreeParticipationEntity
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FreeParticipationCreateDto'
+      responses:
+        '201':
+          description: Get create one base response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FreeParticipationEntity'
+        '400':
+          description: Bad Request
+      tags: *ref_31
+      security: *ref_32
+  /free-participation/{id}:
+    patch:
+      operationId: updateOneBaseFreeParticipationControllerFreeParticipationEntity
+      summary: Update a single FreeParticipationEntity
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FreeParticipationUpdateDto'
+      responses:
+        '200':
+          description: update one response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FreeParticipationEntity'
+        '404':
+          description: Not Found
+      tags: *ref_31
+      security: *ref_32
+  /free-participation/verify:
+    post:
+      operationId: FreeParticipationController_verify
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FreeParticipationVerifyDto'
+      responses:
+        '200':
+          description: verify if a free participation code is
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FreeParticipationVerificationResult'
+      tags: *ref_31
+      security: *ref_32
+  /report/info:
+    get:
+      operationId: ReportController_getInfo
+      parameters:
+        - name: startDate
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: endDate
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: &ref_33
+        - Report
+      security: &ref_34
+        - access-token: []
+  /report/download/{id}:
+    get:
+      operationId: ReportController_downloadReport
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+      tags: *ref_33
+      security: *ref_34
+  /report/generate:
+    post:
+      operationId: ReportController_generateReport
+      parameters:
+        - name: startDate
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: endDate
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+      tags: *ref_33
+      security: *ref_34
+  /report/approve:
+    post:
+      operationId: ReportController_approveReport
+      parameters:
+        - name: startDate
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: endDate
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+      tags: *ref_33
+      security: *ref_34
+  /report/retailers:
+    get:
+      operationId: ReportController_getRetailersSummaryReport
+      parameters:
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_33
+      security: *ref_34
+  /report/retailers/me:
+    get:
+      operationId: ReportController_getOwnRetailerSalesReport
+      parameters:
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_33
+      security: *ref_34
+  /report/retailers/{retailerId}:
+    get:
+      operationId: ReportController_getRetailerSalesReport
+      parameters:
+        - name: retailerId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_33
+      security: *ref_34
+  /report/affiliates:
+    get:
+      operationId: ReportController_getAffiliatesSummaryReport
+      parameters:
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_33
+      security: *ref_34
+  /report/affiliates/me:
+    get:
+      operationId: ReportController_getOwnAffiliateCampaignReport
+      parameters:
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_33
+      security: *ref_34
+  /report/affiliates/{affiliateId}:
+    get:
+      operationId: ReportController_getAffiliateCampaignsReport
+      parameters:
+        - name: affiliateId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_33
+      security: *ref_34
+  /report/sales-representatives:
+    get:
+      operationId: ReportController_getSalesRepsSummaryReport
+      parameters:
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_33
+      security: *ref_34
+  /report/sales-representatives/me:
+    get:
+      operationId: ReportController_getOwnSalesRepsVendorsReport
+      parameters:
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_33
+      security: *ref_34
+  /report/sales-representatives/{salesRepId}:
+    get:
+      operationId: ReportController_getSalesRepsVendorsReport
+      parameters:
+        - name: salesRepId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_33
+      security: *ref_34
+  /report/campaign/{campaignId}:
+    get:
+      operationId: ReportController_getCampaignSalesReport
+      parameters:
+        - name: campaignId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_33
+      security: *ref_34
+  /report:
+    get:
+      operationId: getManyBaseReportControllerReportEntity
+      summary: Retrieve multiple ReportEntities
+      parameters:
+        - name: fields
+          description: >-
+            Selects resource fields. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#select"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: s
+          description: >-
+            Adds search condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#search"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: filter
+          description: >-
+            Adds filter condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#filter"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: or
+          description: >-
+            Adds OR condition. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#or"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: sort
+          description: >-
+            Adds sort by field. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#sort"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: join
+          description: >-
+            Adds relational resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#join"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: limit
+          description: >-
+            Limit amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#limit"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          description: >-
+            Offset amount of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#offset"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: page
+          description: >-
+            Page portion of resources. <a
+            href="https://github.com/rewiko/crud/wiki/Requests#page"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+        - name: cache
+          description: >-
+            Reset cache (if was enabled). <a
+            href="https://github.com/rewiko/crud/wiki/Requests#cache"
+            target="_blank">Docs</a>
+          required: false
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Get paginated response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportDto'
+      tags: *ref_33
+      security: *ref_34
+  /dashboard:
+    get:
+      operationId: DashboardController_getUserDashboard
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_35
+        - Report
+      security: &ref_36
+        - access-token: []
+  /dashboard/admin:
+    get:
+      operationId: DashboardController_getAdminDashboard
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_35
+      security: *ref_36
+  /scheduling/status:
+    get:
+      operationId: SchedulingController_getSchedulerStatus
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_37
+        - Worker
+      security: &ref_38
+        - access-token: []
+  /scheduling/job/{jobId}:
+    post:
+      operationId: SchedulingController_startJobWithId
+      parameters:
+        - name: jobId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+      tags: *ref_37
+      security: *ref_38
+    delete:
+      operationId: SchedulingController_stopJobWithId
+      parameters:
+        - name: jobId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_37
+      security: *ref_38
+  /scheduling/draws:
+    post:
+      operationId: SchedulingController_startDrawJobs
+      parameters: []
+      responses:
+        '201':
+          description: ''
+      tags: *ref_37
+      security: *ref_38
+    delete:
+      operationId: SchedulingController_stopDrawJobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_37
+      security: *ref_38
+  /scheduling/generators:
+    post:
+      operationId: SchedulingController_startGeneratorJobs
+      parameters: []
+      responses:
+        '201':
+          description: ''
+      tags: *ref_37
+      security: *ref_38
+    delete:
+      operationId: SchedulingController_stopGeneratorJobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_37
+      security: *ref_38
+info:
+  title: BB Api
+  description: bluball backend api
+  version: '1.0'
+  contact: {}
+tags: []
+servers: []
+components:
+  securitySchemes:
+    access-token:
+      type: http
+      scheme: bearer
+  schemas:
+    AccountGetManyDto:
+      type: object
+      properties:
+        count:
+          type: number
+        total:
+          type: number
+        page:
+          type: number
+        pageCount:
+          type: number
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountDto'
+      required:
+        - count
+        - total
+        - page
+        - pageCount
+        - data
+    CountryEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        twoLettersIsoCode:
+          type: string
+        tld:
+          type: string
+        name:
+          type: string
+        displayOrder:
+          type: number
+        isEnabled:
+          type: boolean
+      required:
+        - createdAt
+        - updatedAt
+        - twoLettersIsoCode
+        - tld
+        - name
+        - displayOrder
+        - isEnabled
+    StateEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        code:
+          type: string
+        country:
+          $ref: '#/components/schemas/CountryEntity'
+        name:
+          type: string
+        stateCode:
+          type: string
+        isEnabled:
+          type: boolean
+      required:
+        - createdAt
+        - updatedAt
+        - code
+        - country
+        - name
+        - stateCode
+        - isEnabled
+    TransactionStatusEntity:
+      type: object
+      properties:
+        code:
+          type: string
+      required:
+        - code
+    TransactionTypeEntity:
+      type: object
+      properties:
+        code:
+          type: string
+      required:
+        - code
+    ReferralCampaignEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        code:
+          type: string
+        name:
+          type: string
+        affiliate:
+          $ref: '#/components/schemas/AffiliateEntity'
+        commissionPercentage:
+          type: number
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - code
+        - name
+        - affiliate
+        - commissionPercentage
+    AffiliateEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        code:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserEntity'
+        isActive:
+          type: boolean
+        referralCampaigns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReferralCampaignEntity'
+        representative:
+          $ref: '#/components/schemas/SalesRepEntity'
+        commissionPercentageOverride:
+          type: number
+        timezone:
+          type: string
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - code
+        - user
+        - isActive
+        - referralCampaigns
+        - representative
+        - commissionPercentageOverride
+        - timezone
+    SalesRepEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserEntity'
+        isActive:
+          type: boolean
+        timezone:
+          type: string
+        affiliates:
+          type: array
+          items:
+            $ref: '#/components/schemas/AffiliateEntity'
+        retailers:
+          type: array
+          items:
+            $ref: '#/components/schemas/RetailerEntity'
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - user
+        - isActive
+        - timezone
+        - affiliates
+        - retailers
+    GameEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - name
+    GetManyParticipationCombinationEntityResponseDto:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParticipationCombinationEntity'
+        count:
+          type: number
+        total:
+          type: number
+        page:
+          type: number
+        pageCount:
+          type: number
+      required:
+        - data
+        - count
+        - total
+        - page
+        - pageCount
+    GameDrawEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        number1:
+          type: number
+        number2:
+          type: number
+        number3:
+          type: number
+        number4:
+          type: number
+        number5:
+          type: number
+        number6:
+          type: number
+        number7:
+          type: number
+        number8:
+          type: number
+        game:
+          $ref: '#/components/schemas/GameEntity'
+        gameId:
+          type: string
+        drawDate:
+          format: date-time
+          type: string
+        drawExecutionDate:
+          format: date-time
+          type: string
+        prizeOneWinnerQty:
+          type: number
+        prizeOneRealWinnerQty:
+          type: number
+        prizeOneWinnerTotalAmount:
+          type: number
+        prizeOneRealWinnerTotalAmount:
+          type: number
+        prizeTwoWinnerQty:
+          type: number
+        prizeTwoRealWinnerQty:
+          type: number
+        prizeTwoWinnerTotalAmount:
+          type: number
+        prizeTwoRealWinnerTotalAmount:
+          type: number
+        prizeThreeWinnerQty:
+          type: number
+        prizeThreeRealWinnerQty:
+          type: number
+        prizeThreeWinnerTotalAmount:
+          type: number
+        prizeThreeRealWinnerTotalAmount:
+          type: number
+        homeParticipationsTotalAmount:
+          type: number
+        realParticipationsTotalAmount:
+          type: number
+        freeParticipationsTotalNumber:
+          type: number
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - number1
+        - number2
+        - number3
+        - number4
+        - number5
+        - number6
+        - number7
+        - number8
+        - game
+        - gameId
+        - drawDate
+        - drawExecutionDate
+        - prizeOneWinnerQty
+        - prizeOneRealWinnerQty
+        - prizeOneWinnerTotalAmount
+        - prizeOneRealWinnerTotalAmount
+        - prizeTwoWinnerQty
+        - prizeTwoRealWinnerQty
+        - prizeTwoWinnerTotalAmount
+        - prizeTwoRealWinnerTotalAmount
+        - prizeThreeWinnerQty
+        - prizeThreeRealWinnerQty
+        - prizeThreeWinnerTotalAmount
+        - prizeThreeRealWinnerTotalAmount
+        - homeParticipationsTotalAmount
+        - realParticipationsTotalAmount
+        - freeParticipationsTotalNumber
+    GameDrawResultEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        gameDraw:
+          $ref: '#/components/schemas/GameDrawEntity'
+        account:
+          $ref: '#/components/schemas/AccountEntity'
+        combination:
+          $ref: '#/components/schemas/ParticipationCombinationEntity'
+        prizeAmount:
+          type: number
+        prizeType:
+          type: string
+        transaction:
+          $ref: '#/components/schemas/TransactionEntity'
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - gameDraw
+        - account
+        - combination
+        - prizeAmount
+        - prizeType
+        - transaction
+    ReservedCombinationEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        number1:
+          type: number
+        number2:
+          type: number
+        number3:
+          type: number
+        number4:
+          type: number
+        number5:
+          type: number
+        number6:
+          type: number
+        number7:
+          type: number
+        number8:
+          type: number
+        game:
+          $ref: '#/components/schemas/GameEntity'
+        expiresAt:
+          format: date-time
+          type: string
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - number1
+        - number2
+        - number3
+        - number4
+        - number5
+        - number6
+        - number7
+        - number8
+        - game
+        - expiresAt
+    ParticipationCombinationEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        number1:
+          type: number
+        number2:
+          type: number
+        number3:
+          type: number
+        number4:
+          type: number
+        number5:
+          type: number
+        number6:
+          type: number
+        number7:
+          type: number
+        number8:
+          type: number
+        participation:
+          $ref: '#/components/schemas/ParticipationEntity'
+        participationValue:
+          type: number
+        gameDraw:
+          $ref: '#/components/schemas/GameDrawEntity'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GameDrawResultEntity'
+        reservation:
+          $ref: '#/components/schemas/ReservedCombinationEntity'
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - number1
+        - number2
+        - number3
+        - number4
+        - number5
+        - number6
+        - number7
+        - number8
+        - participation
+        - participationValue
+        - gameDraw
+        - results
+        - reservation
+    ParticipationEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        game:
+          $ref: '#/components/schemas/GameEntity'
+        account:
+          $ref: '#/components/schemas/AccountEntity'
+        participationCombinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParticipationCombinationEntity'
+        participationValue:
+          type: number
+        drawOffset:
+          type: number
+        transaction:
+          $ref: '#/components/schemas/TransactionEntity'
+        freeParticipation:
+          $ref: '#/components/schemas/FreeParticipationEntity'
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - game
+        - account
+        - participationCombinations
+        - participationValue
+        - drawOffset
+        - transaction
+        - freeParticipation
+    FreeParticipationEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        code:
+          type: string
+        isActive:
+          type: boolean
+        type:
+          type: string
+        participationValueCredits:
+          type: number
+        retailer:
+          $ref: '#/components/schemas/RetailerEntity'
+        participation:
+          $ref: '#/components/schemas/ParticipationEntity'
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - code
+        - isActive
+        - type
+        - participationValueCredits
+        - retailer
+        - participation
+    RetailerEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          $ref: '#/components/schemas/UserEntity'
+        coupons:
+          type: array
+          items:
+            $ref: '#/components/schemas/CouponEntity'
+        isActive:
+          type: boolean
+        representative:
+          $ref: '#/components/schemas/SalesRepEntity'
+        commissionPercentageOverride:
+          type: number
+        creditLimit:
+          type: number
+        freeParticipations:
+          type: array
+          items:
+            $ref: '#/components/schemas/FreeParticipationEntity'
+        timezone:
+          type: string
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - name
+        - owner
+        - coupons
+        - isActive
+        - representative
+        - commissionPercentageOverride
+        - creditLimit
+        - freeParticipations
+        - timezone
+    CouponEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        code:
+          type: string
+        isActive:
+          type: boolean
+        isPhysical:
+          type: boolean
+        amountCAD:
+          type: number
+        recipientPhone:
+          type: string
+        recipientEmail:
+          type: string
+        recipientLocale:
+          type: string
+        retailer:
+          $ref: '#/components/schemas/RetailerEntity'
+        transaction:
+          $ref: '#/components/schemas/TransactionEntity'
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - code
+        - isActive
+        - isPhysical
+        - amountCAD
+        - recipientPhone
+        - recipientEmail
+        - recipientLocale
+        - retailer
+        - transaction
+    InteracTransactionEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        paymentToken:
+          type: string
+        status:
+          type: string
+        amountCAD:
+          type: number
+        ipAddress:
+          type: string
+        transaction:
+          $ref: '#/components/schemas/TransactionEntity'
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - paymentToken
+        - status
+        - amountCAD
+        - ipAddress
+        - transaction
+    CryptoTransactionEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        amountCAD:
+          type: number
+        btcWalletAddress:
+          type: string
+        amountBtcAtRequest:
+          type: number
+        transaction:
+          $ref: '#/components/schemas/TransactionEntity'
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - amountCAD
+        - btcWalletAddress
+        - amountBtcAtRequest
+        - transaction
+    AdjustmentTransactionEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        reason:
+          type: string
+        admin:
+          $ref: '#/components/schemas/UserEntity'
+        transaction:
+          $ref: '#/components/schemas/TransactionEntity'
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - reason
+        - admin
+        - transaction
+    TransactionDto:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        sourceAccount:
+          $ref: '#/components/schemas/AccountEntity'
+        destinationAccount:
+          $ref: '#/components/schemas/AccountEntity'
+        amountCredit:
+          type: number
+        status:
+          $ref: '#/components/schemas/TransactionStatusEntity'
+        statusUpdatedAt:
+          format: date-time
+          type: string
+        type:
+          $ref: '#/components/schemas/TransactionTypeEntity'
+        coupon:
+          $ref: '#/components/schemas/CouponEntity'
+        interacTransaction:
+          $ref: '#/components/schemas/InteracTransactionEntity'
+        cryptoTransaction:
+          $ref: '#/components/schemas/CryptoTransactionEntity'
+        adjustmentTransaction:
+          $ref: '#/components/schemas/AdjustmentTransactionEntity'
+        gameDrawResult:
+          $ref: '#/components/schemas/GameDrawResultEntity'
+        participation:
+          $ref: '#/components/schemas/ParticipationEntity'
+        referralCampaign:
+          $ref: '#/components/schemas/ReferralCampaignEntity'
+        referralDate:
+          format: date-time
+          type: string
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - sourceAccount
+        - destinationAccount
+        - amountCredit
+        - status
+        - statusUpdatedAt
+        - type
+        - coupon
+        - interacTransaction
+        - cryptoTransaction
+        - adjustmentTransaction
+        - gameDrawResult
+        - participation
+        - referralCampaign
+        - referralDate
+    TransactionGetManyDto:
+      type: object
+      properties:
+        count:
+          type: number
+        total:
+          type: number
+        page:
+          type: number
+        pageCount:
+          type: number
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionDto'
+      required:
+        - count
+        - total
+        - page
+        - pageCount
+        - data
+    AccountBalanceEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        account:
+          $ref: '#/components/schemas/AccountEntity'
+        amountCredit:
+          type: number
+        transaction:
+          $ref: '#/components/schemas/TransactionEntity'
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - account
+        - amountCredit
+        - transaction
+    TransactionEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        sourceAccount:
+          $ref: '#/components/schemas/AccountEntity'
+        destinationAccount:
+          $ref: '#/components/schemas/AccountEntity'
+        balances:
+          $ref: '#/components/schemas/AccountBalanceEntity'
+        amountCredit:
+          type: number
+        status:
+          $ref: '#/components/schemas/TransactionStatusEntity'
+        statusUpdatedAt:
+          format: date-time
+          type: string
+        type:
+          $ref: '#/components/schemas/TransactionTypeEntity'
+        coupon:
+          $ref: '#/components/schemas/CouponEntity'
+        interacTransaction:
+          $ref: '#/components/schemas/InteracTransactionEntity'
+        cryptoTransaction:
+          $ref: '#/components/schemas/CryptoTransactionEntity'
+        adjustmentTransaction:
+          $ref: '#/components/schemas/AdjustmentTransactionEntity'
+        gameDrawResult:
+          $ref: '#/components/schemas/GameDrawResultEntity'
+        participation:
+          $ref: '#/components/schemas/ParticipationEntity'
+        referralCampaign:
+          $ref: '#/components/schemas/ReferralCampaignEntity'
+        referralDate:
+          format: date-time
+          type: string
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - sourceAccount
+        - destinationAccount
+        - balances
+        - amountCredit
+        - status
+        - statusUpdatedAt
+        - type
+        - coupon
+        - interacTransaction
+        - cryptoTransaction
+        - adjustmentTransaction
+        - gameDrawResult
+        - participation
+        - referralCampaign
+        - referralDate
+    AccountEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserEntity'
+        selfExcludedAt:
+          format: date-time
+          type: string
+        limitAmount:
+          type: number
+        isActive:
+          type: boolean
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionEntity'
+        balances:
+          $ref: '#/components/schemas/AccountBalanceEntity'
+        gameDrawResults:
+          type: array
+          items:
+            type: string
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - user
+        - selfExcludedAt
+        - limitAmount
+        - isActive
+        - transactions
+        - balances
+        - gameDrawResults
+    UserEntity:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        photoUrl:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        isEmailVerified:
+          type: boolean
+        isDarkMode:
+          type: boolean
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        postalCode:
+          type: string
+        state:
+          $ref: '#/components/schemas/StateEntity'
+        locale:
+          type: string
+        enableSmsMfa:
+          type: boolean
+        accessLevel:
+          type: number
+        isActive:
+          type: boolean
+        account:
+          $ref: '#/components/schemas/AccountEntity'
+        retailers:
+          type: array
+          items:
+            type: string
+        affiliate:
+          $ref: '#/components/schemas/AffiliateEntity'
+        salesRep:
+          $ref: '#/components/schemas/SalesRepEntity'
+        isRetailer:
+          type: boolean
+        isAffiliate:
+          type: boolean
+        isSalesRep:
+          type: boolean
+        hasAccount:
+          type: boolean
+        isNewsletterSubscribed:
+          type: boolean
+        notifyDrawResultSms:
+          type: boolean
+        notifyDrawResultEmail:
+          type: boolean
+        notifyWeeklyReportSms:
+          type: boolean
+        notifyWeeklyReportEmail:
+          type: boolean
+        notifyAccountUpdateSms:
+          type: boolean
+        notifyAccountUpdateEmail:
+          type: boolean
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - firstName
+        - lastName
+        - photoUrl
+        - email
+        - phone
+        - isEmailVerified
+        - isDarkMode
+        - addressLine1
+        - addressLine2
+        - city
+        - postalCode
+        - state
+        - locale
+        - enableSmsMfa
+        - accessLevel
+        - isActive
+        - account
+        - retailers
+        - affiliate
+        - salesRep
+        - isRetailer
+        - isAffiliate
+        - isSalesRep
+        - hasAccount
+        - isNewsletterSubscribed
+        - notifyDrawResultSms
+        - notifyDrawResultEmail
+        - notifyWeeklyReportSms
+        - notifyWeeklyReportEmail
+        - notifyAccountUpdateSms
+        - notifyAccountUpdateEmail
+    AccountDto:
+      type: object
+      properties:
+        id:
+          type: string
+        selfExcludedAt:
+          format: date-time
+          type: string
+        limitAmount:
+          type: number
+      required:
+        - id
+        - selfExcludedAt
+        - limitAmount
+    AccountMeDto:
+      type: object
+      properties:
+        selfExcludedAt:
+          format: date-time
+          type: string
+        limitAmount:
+          type: number
+      required:
+        - selfExcludedAt
+        - limitAmount
+    AccountCreateDto:
+      type: object
+      properties:
+        selfExcludedAt:
+          format: date-time
+          type: string
+        limitAmount:
+          type: number
+        userId:
+          type: string
+      required:
+        - selfExcludedAt
+        - limitAmount
+        - userId
+    AccountUpdateDto:
+      type: object
+      properties:
+        selfExcludedAt:
+          format: date-time
+          type: string
+        limitAmount:
+          type: number
+        isActive:
+          type: boolean
+    AssignStateEntityDto:
+      type: object
+      properties: {}
+    UserUpdateMeDto:
+      type: object
+      properties:
+        photoUrl:
+          type: string
+        isDarkMode:
+          type: boolean
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        postalCode:
+          type: string
+        isActive:
+          type: boolean
+        isNewsletterSubscribed:
+          type: boolean
+        notifyDrawResultSms:
+          type: boolean
+        notifyDrawResultEmail:
+          type: boolean
+        notifyWeeklyReportSms:
+          type: boolean
+        notifyWeeklyReportEmail:
+          type: boolean
+        notifyAccountUpdateSms:
+          type: boolean
+        notifyAccountUpdateEmail:
+          type: boolean
+        state:
+          $ref: '#/components/schemas/AssignStateEntityDto'
+      required:
+        - photoUrl
+        - isDarkMode
+        - addressLine1
+        - addressLine2
+        - city
+        - postalCode
+        - isActive
+        - isNewsletterSubscribed
+        - notifyDrawResultSms
+        - notifyDrawResultEmail
+        - notifyWeeklyReportSms
+        - notifyWeeklyReportEmail
+        - notifyAccountUpdateSms
+        - notifyAccountUpdateEmail
+        - state
+    UserGetManyDto:
+      type: object
+      properties:
+        count:
+          type: number
+        total:
+          type: number
+        page:
+          type: number
+        pageCount:
+          type: number
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDto'
+      required:
+        - count
+        - total
+        - page
+        - pageCount
+        - data
+    UserDto:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        photoUrl:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        isEmailVerified:
+          type: boolean
+        isDarkMode:
+          type: boolean
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        postalCode:
+          type: string
+        state:
+          $ref: '#/components/schemas/StateEntity'
+        locale:
+          type: string
+        enableSmsMfa:
+          type: boolean
+        accessLevel:
+          type: number
+        isActive:
+          type: boolean
+        account:
+          $ref: '#/components/schemas/AccountEntity'
+        retailers:
+          type: array
+          items:
+            type: string
+        affiliate:
+          $ref: '#/components/schemas/AffiliateEntity'
+        salesRep:
+          $ref: '#/components/schemas/SalesRepEntity'
+        isRetailer:
+          type: boolean
+        isAffiliate:
+          type: boolean
+        isSalesRep:
+          type: boolean
+        hasAccount:
+          type: boolean
+        isNewsletterSubscribed:
+          type: boolean
+        notifyDrawResultSms:
+          type: boolean
+        notifyDrawResultEmail:
+          type: boolean
+        notifyWeeklyReportSms:
+          type: boolean
+        notifyWeeklyReportEmail:
+          type: boolean
+        notifyAccountUpdateSms:
+          type: boolean
+        notifyAccountUpdateEmail:
+          type: boolean
+        isSuperAdmin:
+          type: boolean
+        isAdmin:
+          type: boolean
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - firstName
+        - lastName
+        - photoUrl
+        - email
+        - phone
+        - isEmailVerified
+        - isDarkMode
+        - addressLine1
+        - addressLine2
+        - city
+        - postalCode
+        - state
+        - locale
+        - enableSmsMfa
+        - accessLevel
+        - isActive
+        - account
+        - retailers
+        - affiliate
+        - salesRep
+        - isRetailer
+        - isAffiliate
+        - isSalesRep
+        - hasAccount
+        - isNewsletterSubscribed
+        - notifyDrawResultSms
+        - notifyDrawResultEmail
+        - notifyWeeklyReportSms
+        - notifyWeeklyReportEmail
+        - notifyAccountUpdateSms
+        - notifyAccountUpdateEmail
+        - isSuperAdmin
+        - isAdmin
+    UserCreateDto:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        isDarkMode:
+          type: boolean
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        postalCode:
+          type: string
+        locale:
+          type: string
+        state:
+          $ref: '#/components/schemas/AssignStateEntityDto'
+        accessLevel:
+          type: number
+        useAdminPortalLink:
+          type: boolean
+      required:
+        - firstName
+        - lastName
+        - email
+        - phone
+        - isDarkMode
+        - addressLine1
+        - addressLine2
+        - city
+        - postalCode
+        - locale
+        - state
+        - accessLevel
+        - useAdminPortalLink
+    UserUpdateDto:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+        isDarkMode:
+          type: boolean
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        postalCode:
+          type: string
+        locale:
+          type: string
+        isActive:
+          type: boolean
+        isNewsletterSubscribed:
+          type: boolean
+        notifyDrawResultSms:
+          type: boolean
+        notifyDrawResultEmail:
+          type: boolean
+        notifyWeeklyReportSms:
+          type: boolean
+        notifyWeeklyReportEmail:
+          type: boolean
+        notifyAccountUpdateSms:
+          type: boolean
+        notifyAccountUpdateEmail:
+          type: boolean
+        accessLevel:
+          type: number
+        state:
+          $ref: '#/components/schemas/AssignStateEntityDto'
+      required:
+        - accessLevel
+        - state
+    CountryStateIsEnabledDto:
+      type: object
+      properties: {}
+    CountryGetManyDto:
+      type: object
+      properties:
+        count:
+          type: number
+        total:
+          type: number
+        page:
+          type: number
+        pageCount:
+          type: number
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryDto'
+      required:
+        - count
+        - total
+        - page
+        - pageCount
+        - data
+    CountryDto:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        twoLettersIsoCode:
+          type: string
+        tld:
+          type: string
+        name:
+          type: string
+        displayOrder:
+          type: number
+      required:
+        - createdAt
+        - updatedAt
+        - twoLettersIsoCode
+        - tld
+        - name
+        - displayOrder
+    NewsletterSubscriptionDto:
+      type: object
+      properties:
+        recaptchaToken:
+          type: string
+        email:
+          type: string
+      required:
+        - recaptchaToken
+        - email
+    AssignEntityDto:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+        - id
+    AffiliateCreateDto:
+      type: object
+      properties:
+        timezone:
+          type: string
+        userId:
+          type: string
+        representative:
+          $ref: '#/components/schemas/AssignEntityDto'
+      required:
+        - timezone
+        - userId
+        - representative
+    AffiliateUpdateDto:
+      type: object
+      properties:
+        isActive:
+          type: boolean
+        commissionPercentageOverride:
+          type: number
+        representative:
+          $ref: '#/components/schemas/AssignEntityDto'
+      required:
+        - representative
+    AffiliateGetManyDto:
+      type: object
+      properties:
+        count:
+          type: number
+        total:
+          type: number
+        page:
+          type: number
+        pageCount:
+          type: number
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AffiliateDto'
+      required:
+        - count
+        - total
+        - page
+        - pageCount
+        - data
+    AffiliateDto:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        code:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserEntity'
+        isActive:
+          type: boolean
+        referralCampaigns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReferralCampaignEntity'
+        representative:
+          $ref: '#/components/schemas/SalesRepEntity'
+        commissionPercentageOverride:
+          type: number
+        timezone:
+          type: string
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - code
+        - user
+        - isActive
+        - referralCampaigns
+        - representative
+        - commissionPercentageOverride
+        - timezone
+    CouponGetManyDto:
+      type: object
+      properties:
+        count:
+          type: number
+        total:
+          type: number
+        page:
+          type: number
+        pageCount:
+          type: number
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CouponDto'
+      required:
+        - count
+        - total
+        - page
+        - pageCount
+        - data
+    CouponCreateDto:
+      type: object
+      properties:
+        isPhysical:
+          type: boolean
+        amountCAD:
+          type: number
+        recipientPhone:
+          type: string
+        recipientEmail:
+          type: string
+        recipientLocale:
+          type: string
+        retailer:
+          $ref: '#/components/schemas/AssignEntityDto'
+      required:
+        - isPhysical
+        - amountCAD
+        - recipientPhone
+        - recipientEmail
+        - recipientLocale
+        - retailer
+    CouponUpdateDto:
+      type: object
+      properties:
+        isActive:
+          type: boolean
+        isPhysical:
+          type: boolean
+        recipientPhone:
+          type: string
+        recipientEmail:
+          type: string
+        recipientLocale:
+          type: string
+        amountCAD:
+          type: number
+      required:
+        - amountCAD
+    CouponDto:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        code:
+          type: string
+        isActive:
+          type: boolean
+        isPhysical:
+          type: boolean
+        amountCAD:
+          type: number
+        recipientPhone:
+          type: string
+        recipientEmail:
+          type: string
+        recipientLocale:
+          type: string
+        retailer:
+          $ref: '#/components/schemas/RetailerEntity'
+        transaction:
+          $ref: '#/components/schemas/TransactionEntity'
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - code
+        - isActive
+        - isPhysical
+        - amountCAD
+        - recipientPhone
+        - recipientEmail
+        - recipientLocale
+        - retailer
+        - transaction
+    CouponCreateManyDto:
+      type: object
+      properties:
+        isPhysical:
+          type: boolean
+        amountCAD:
+          type: number
+        recipientPhone:
+          type: string
+        recipientEmail:
+          type: string
+        recipientLocale:
+          type: string
+        quantity:
+          type: number
+        retailer:
+          $ref: '#/components/schemas/AssignEntityDto'
+      required:
+        - isPhysical
+        - amountCAD
+        - recipientPhone
+        - recipientEmail
+        - recipientLocale
+        - quantity
+        - retailer
+    CouponDepositRequestDto:
+      type: object
+      properties:
+        recaptchaToken:
+          type: string
+        referralCampaignCode:
+          type: string
+        referralDate:
+          format: date-time
+          type: string
+        couponCode:
+          type: string
+      required:
+        - recaptchaToken
+        - referralCampaignCode
+        - referralDate
+        - couponCode
+    InteracDepositRequestDto:
+      type: object
+      properties:
+        recaptchaToken:
+          type: string
+        referralCampaignCode:
+          type: string
+        referralDate:
+          format: date-time
+          type: string
+        amountCad:
+          type: number
+      required:
+        - recaptchaToken
+        - referralCampaignCode
+        - referralDate
+        - amountCad
+    InteracDepositResponseDto:
+      type: object
+      properties: {}
+    cryptoDepositRequestDto:
+      type: object
+      properties:
+        recaptchaToken:
+          type: string
+        referralCampaignCode:
+          type: string
+        referralDate:
+          format: date-time
+          type: string
+        amountCredit:
+          type: number
+      required:
+        - recaptchaToken
+        - referralCampaignCode
+        - referralDate
+        - amountCredit
+    CryptoWithdrawalRequestDto:
+      type: object
+      properties:
+        recaptchaToken:
+          type: string
+        amountCredit:
+          type: number
+        btcWalletAddress:
+          type: string
+      required:
+        - recaptchaToken
+        - amountCredit
+        - btcWalletAddress
+    TransactionUpdateStatusDto:
+      type: object
+      properties:
+        code:
+          type: string
+      required:
+        - code
+    AdjustmentRequestDto:
+      type: object
+      properties:
+        amountCredit:
+          type: number
+        accountId:
+          type: string
+        reason:
+          type: string
+      required:
+        - amountCredit
+        - accountId
+        - reason
+    TransferDto:
+      type: object
+      properties:
+        recaptchaToken:
+          type: string
+        recipientEmail:
+          type: string
+        amountCredit:
+          type: number
+      required:
+        - recaptchaToken
+        - recipientEmail
+        - amountCredit
+    RetailerCreateDto:
+      type: object
+      properties:
+        name:
+          type: string
+        creditLimit:
+          type: number
+        freeParticipations:
+          type: array
+          items:
+            $ref: '#/components/schemas/FreeParticipationEntity'
+        timezone:
+          type: string
+        userId:
+          type: string
+        representative:
+          $ref: '#/components/schemas/AssignEntityDto'
+      required:
+        - name
+        - creditLimit
+        - freeParticipations
+        - timezone
+        - userId
+        - representative
+    RetailerUpdateDto:
+      type: object
+      properties:
+        name:
+          type: string
+        isActive:
+          type: boolean
+        commissionPercentageOverride:
+          type: number
+        creditLimit:
+          type: number
+        freeParticipations:
+          type: array
+          items:
+            $ref: '#/components/schemas/FreeParticipationEntity'
+        representative:
+          $ref: '#/components/schemas/AssignEntityDto'
+      required:
+        - representative
+    RetailerGetManyDto:
+      type: object
+      properties:
+        count:
+          type: number
+        total:
+          type: number
+        page:
+          type: number
+        pageCount:
+          type: number
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RetailerDto'
+      required:
+        - count
+        - total
+        - page
+        - pageCount
+        - data
+    RetailerDto:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          $ref: '#/components/schemas/UserEntity'
+        coupons:
+          type: array
+          items:
+            $ref: '#/components/schemas/CouponEntity'
+        isActive:
+          type: boolean
+        representative:
+          $ref: '#/components/schemas/SalesRepEntity'
+        commissionPercentageOverride:
+          type: number
+        creditLimit:
+          type: number
+        freeParticipations:
+          type: array
+          items:
+            $ref: '#/components/schemas/FreeParticipationEntity'
+        timezone:
+          type: string
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - name
+        - owner
+        - coupons
+        - isActive
+        - representative
+        - commissionPercentageOverride
+        - creditLimit
+        - freeParticipations
+        - timezone
+    ReferralCampaignCreateDto:
+      type: object
+      properties:
+        name:
+          type: string
+        affiliate:
+          $ref: '#/components/schemas/AssignEntityDto'
+      required:
+        - name
+        - affiliate
+    ReferralCampaignUpdateDto:
+      type: object
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+          description: >-
+            The code of the referral campaign. [Need to be super-admin to
+            provide this field]
+    ReferralCampaignDto:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        code:
+          type: string
+        name:
+          type: string
+        affiliate:
+          $ref: '#/components/schemas/AffiliateEntity'
+        commissionPercentage:
+          type: number
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - code
+        - name
+        - affiliate
+        - commissionPercentage
+    SalesRepCreateDto:
+      type: object
+      properties:
+        timezone:
+          type: string
+        userId:
+          type: string
+      required:
+        - timezone
+        - userId
+    SalesRepUpdateDto:
+      type: object
+      properties:
+        isActive:
+          type: boolean
+    SalesRepGetManyDto:
+      type: object
+      properties:
+        count:
+          type: number
+        total:
+          type: number
+        page:
+          type: number
+        pageCount:
+          type: number
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SalesRepDto'
+      required:
+        - count
+        - total
+        - page
+        - pageCount
+        - data
+    SalesRepDto:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        user:
+          $ref: '#/components/schemas/UserEntity'
+        isActive:
+          type: boolean
+        timezone:
+          type: string
+        affiliates:
+          type: array
+          items:
+            $ref: '#/components/schemas/AffiliateEntity'
+        retailers:
+          type: array
+          items:
+            $ref: '#/components/schemas/RetailerEntity'
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - user
+        - isActive
+        - timezone
+        - affiliates
+        - retailers
+    ObjectiveCreateDto:
+      type: object
+      properties:
+        periodStart:
+          type: string
+        periodEnd:
+          type: string
+        salesObjectiveCAD:
+          type: number
+      required:
+        - periodStart
+        - periodEnd
+        - salesObjectiveCAD
+    ObjectiveUpdateDto:
+      type: object
+      properties:
+        salesObjectiveCAD:
+          type: number
+    AuthSignUpDto:
+      type: object
+      properties:
+        recaptchaToken:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        password:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        locale:
+          type: string
+          enum:
+            - fr
+            - en
+        isNewsletterSubscribed:
+          type: boolean
+      required:
+        - recaptchaToken
+        - email
+        - phone
+        - password
+        - firstName
+        - lastName
+        - locale
+        - isNewsletterSubscribed
+    AuthSignUpConfirmationDto:
+      type: object
+      properties:
+        email:
+          type: string
+        confirmationCode:
+          type: string
+      required:
+        - email
+        - confirmationCode
+    AuthSignUpResendConfirmationDto:
+      type: object
+      properties:
+        email:
+          type: string
+      required:
+        - email
+    AuthLoginDto:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        deviceKey:
+          type: string
+      required:
+        - email
+        - password
+        - deviceKey
+    AuthLoginChallengeResponseDto:
+      type: object
+      properties:
+        $metadata:
+          type: object
+          description: >-
+            Metadata of the request. Contains HTTP Code to identify if the
+            request successful. In case of error (ex. bad email/password) the
+            total retry delay should be observed before trying a new login
+            attempt
+        ChallengeName:
+          type: string
+          description: >-
+            Identifies which type of challenge was used. Most of our users will
+            have SMS_MFA
+        ChallengeParameters:
+          type: object
+          description: >-
+            Describes how the challenge was asked. CODE_DELIVERY_DESTINATION
+            contains masked information to helpthe user find is code.
+            USER_ID_FOR_SRP must be kept and used on the login-challenge request
+            instead of the user's email. 
+        Session:
+          type: string
+          description: Session must be kept and used on the login-challenge call
+      required:
+        - $metadata
+        - ChallengeName
+        - ChallengeParameters
+        - Session
+    AuthRefreshTokensDto:
+      type: object
+      properties:
+        userId:
+          type: string
+        refreshToken:
+          type: string
+        deviceKey:
+          type: string
+      required:
+        - userId
+        - refreshToken
+        - deviceKey
+    AuthChallengeResponseDto:
+      type: object
+      properties:
+        mfaCode:
+          type: string
+        session:
+          type: string
+        userId:
+          type: string
+      required:
+        - mfaCode
+        - session
+        - userId
+    AuthNewPasswordRequiredChallengeDto:
+      type: object
+      properties:
+        session:
+          type: string
+        userId:
+          type: string
+        newPassword:
+          type: string
+      required:
+        - session
+        - userId
+        - newPassword
+    AuthForgotPasswordDto:
+      type: object
+      properties:
+        recaptchaToken:
+          type: string
+        email:
+          type: string
+      required:
+        - recaptchaToken
+        - email
+    AuthForgotPasswordConfirmationDto:
+      type: object
+      properties:
+        email:
+          type: string
+        confirmationCode:
+          type: string
+        newPassword:
+          type: string
+      required:
+        - email
+        - confirmationCode
+        - newPassword
+    ChangePasswordDto:
+      type: object
+      properties:
+        previousPassword:
+          type: string
+        newPassword:
+          type: string
+      required:
+        - previousPassword
+        - newPassword
+    GlobalSignOutDto:
+      type: object
+      properties:
+        accessToken:
+          type: string
+      required:
+        - accessToken
+    AuthPreferencesDto:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        locale:
+          type: string
+          enum:
+            - fr
+            - en
+        phone:
+          type: string
+        enableSmsMfa:
+          type: boolean
+        firstName:
+          type: string
+        lastName:
+          type: string
+      required:
+        - accessToken
+        - locale
+        - phone
+        - enableSmsMfa
+        - firstName
+        - lastName
+    AuthPreferencesVerifyPhoneDto:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        confirmationCode:
+          type: string
+      required:
+        - accessToken
+        - confirmationCode
+    AdminResetPasswordDto:
+      type: object
+      properties:
+        email:
+          type: string
+      required:
+        - email
+    Extra:
+      type: object
+      properties:
+        target:
+          type: number
+      required:
+        - target
+    DrawBias:
+      type: object
+      properties:
+        extra:
+          $ref: '#/components/schemas/Extra'
+      required:
+        - extra
+    GameConfigurationUpdateDto:
+      type: object
+      properties:
+        drawAmountTarget:
+          type: number
+        drawBias:
+          $ref: '#/components/schemas/DrawBias'
+        hasJackpotWinner:
+          type: boolean
+    GamePartialDto:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+        - name
+    ParticipationCombinationPartialDto:
+      type: object
+      properties:
+        number1:
+          type: number
+        number2:
+          type: number
+        number3:
+          type: number
+        number4:
+          type: number
+        number5:
+          type: number
+        number6:
+          type: number
+        number7:
+          type: number
+        number8:
+          type: number
+        reservation:
+          $ref: '#/components/schemas/AssignEntityDto'
+      required:
+        - number1
+        - number2
+        - number3
+        - number4
+        - number5
+        - number6
+        - number7
+        - number8
+        - reservation
+    ParticipationCreateDto:
+      type: object
+      properties:
+        drawOffset:
+          type: number
+        game:
+          $ref: '#/components/schemas/GamePartialDto'
+        participationCombinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParticipationCombinationPartialDto'
+      required:
+        - drawOffset
+        - game
+        - participationCombinations
+    FreeParticipationDepositDto:
+      type: object
+      properties:
+        game:
+          $ref: '#/components/schemas/GamePartialDto'
+        participationCombinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParticipationCombinationPartialDto'
+        drawOffset:
+          type: object
+        code:
+          type: string
+      required:
+        - game
+        - participationCombinations
+        - drawOffset
+        - code
+    ReservedCombinationCreateDto:
+      type: object
+      properties:
+        recaptchaToken:
+          type: string
+        game:
+          type: string
+      required:
+        - recaptchaToken
+        - game
+    FreeParticipationGetManyDto:
+      type: object
+      properties:
+        count:
+          type: number
+        total:
+          type: number
+        page:
+          type: number
+        pageCount:
+          type: number
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FreeParticipationDto'
+      required:
+        - count
+        - total
+        - page
+        - pageCount
+        - data
+    FreeParticipationCreateDto:
+      type: object
+      properties:
+        type:
+          type: string
+        participationValueCredits:
+          type: number
+        retailer:
+          $ref: '#/components/schemas/AssignEntityDto'
+        recipientEmail:
+          type: string
+        recipientLocale:
+          type: string
+        quantity:
+          type: number
+      required:
+        - type
+        - participationValueCredits
+        - retailer
+        - recipientEmail
+        - recipientLocale
+        - quantity
+    FreeParticipationUpdateDto:
+      type: object
+      properties:
+        isActive:
+          type: boolean
+    FreeParticipationDto:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        code:
+          type: string
+        isActive:
+          type: boolean
+        type:
+          type: string
+        participationValueCredits:
+          type: number
+        retailer:
+          $ref: '#/components/schemas/RetailerEntity'
+        participation:
+          $ref: '#/components/schemas/ParticipationEntity'
+      required:
+        - createdAt
+        - updatedAt
+        - id
+        - code
+        - isActive
+        - type
+        - participationValueCredits
+        - retailer
+        - participation
+    FreeParticipationVerifyDto:
+      type: object
+      properties:
+        recaptchaToken:
+          type: string
+        code:
+          type: string
+      required:
+        - recaptchaToken
+        - code
+    FreeParticipationVerificationResult:
+      type: object
+      properties:
+        message:
+          type: string
+        isValid:
+          type: boolean
+        type:
+          type: string
+        errorCode:
+          type: string
+      required:
+        - message
+        - isValid
+        - type
+        - errorCode
+    ReportDto:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        id:
+          type: number
+      required:
+        - createdAt
+        - updatedAt
+        - id

@@ -1,0 +1,276 @@
+{
+	"openapi": ["./openapi.json"],
+	"name": "Bluball API",
+	"logo": {
+		"dark": "/logo/dark.svg",
+		"light": "/logo/light.svg"
+	},
+	"favicon": "/favicon.svg",
+	"colors": {
+		"primary": "#008da9",
+		"light": "#008da9",
+		"dark": "#008da9"
+	},
+	"topbarCtaButton": {
+		"name": "Website",
+		"url": "https://bluball.com"
+	},
+	"navigation": [
+		{
+			"group": "Get Started",
+			"pages": ["introduction", "quickstart", "development"]
+		},
+		{
+			"group": "Endpoints",
+			"pages": [
+				{
+					"group": "Account",
+					"pages": [
+						"api-reference/account/get-accountmewithdrawal-limit",
+						"api-reference/account/get-accountmeloyalty-points-balance",
+						"api-reference/account/get-accountme",
+						"api-reference/account/patch-accountme",
+						"api-reference/account/retrieve-multiple-accountentities",
+						"api-reference/account/create-a-single-accountentity",
+						"api-reference/account/update-a-single-accountentity",
+						"api-reference/account/get-accountmebalances",
+						"api-reference/account/get-account-balances",
+						"api-reference/account/retrieve-multiple-transactionentities"
+					]
+				},
+				{
+					"group": "Role",
+					"pages": [
+						"api-reference/role/post-rolesync-roles",
+						"api-reference/role/post-rolesync-roles-1"
+					]
+				},
+				{
+					"group": "Users",
+					"pages": [
+						"api-reference/users/get-userme",
+						"api-reference/users/patch-userme",
+						"api-reference/users/get-usermenotification-preferences",
+						"api-reference/users/post-usermephoto",
+						"api-reference/users/retrieve-multiple-userentities",
+						"api-reference/users/create-a-single-userentity",
+						"api-reference/users/retrieve-a-single-userentity",
+						"api-reference/users/update-a-single-userentity",
+						"api-reference/users/get-userhomeuser",
+						"api-reference/users/get-user-verify-hard-delete",
+						"api-reference/users/delete-user-hard-delete"
+					]
+				},
+				{
+					"group": "Country",
+					"pages": [
+						"api-reference/country/get-countryallstates",
+						"api-reference/country/patch-country-enabled",
+						"api-reference/country/patch-country-state-enabled",
+						"api-reference/country/get-countrysearch",
+						"api-reference/country/retrieve-multiple-countryentities"
+					]
+				},
+				{
+					"group": "Address",
+					"pages": [
+						"api-reference/address/get-addressautocomplete",
+						"api-reference/address/get-addressdetails"
+					]
+				},
+				{
+					"group": "Newsletter",
+					"pages": [
+						"api-reference/newsletter/post-newslettersubscribe",
+						"api-reference/newsletter/get-newsletterwebhooksync",
+						"api-reference/newsletter/post-newsletterwebhooksync"
+					]
+				},
+				{
+					"group": "Affiliate",
+					"pages": [
+						"api-reference/affiliate/retrieve-multiple-affiliateentities",
+						"api-reference/affiliate/create-a-single-affiliateentity",
+						"api-reference/affiliate/retrieve-a-single-affiliateentity",
+						"api-reference/affiliate/update-a-single-affiliateentity"
+					]
+				},
+				{
+					"group": "Coupon",
+					"pages": [
+						"api-reference/coupon/retrieve-multiple-couponentities",
+						"api-reference/coupon/create-a-single-couponentity",
+						"api-reference/coupon/post-couponcreate-many",
+						"api-reference/coupon/delete-a-single-couponentity",
+						"api-reference/coupon/update-a-single-couponentity"
+					]
+				},
+				{
+					"group": "Transaction - Deposit",
+					"pages": [
+						"api-reference/transaction--deposit/post-transactiondepositcoupon",
+						"api-reference/transaction--deposit/post-transactiondepositinterac",
+						"api-reference/transaction--deposit/post-transactiondepositinteraccallback",
+						"api-reference/transaction--deposit/post-transactiondepositcrypto"
+					]
+				},
+				{
+					"group": "Transaction - Withdrawal",
+					"pages": [
+						"api-reference/transaction--withdrawal/post-transactionwithdrawalcrypto"
+					]
+				},
+				{
+					"group": "Transaction - Settings",
+					"pages": [
+						"api-reference/transaction--settings/get-transactioncreditsetting"
+					]
+				},
+				{
+					"group": "Transaction",
+					"pages": [
+						"api-reference/transaction/patch-transaction-status",
+						"api-reference/transaction/post-transactionadjustment",
+						"api-reference/transaction/retrieve-multiple-transactionentities"
+					]
+				},
+				{
+					"group": "Transaction - Transfer Request",
+					"pages": [
+						"api-reference/transaction--transfer-request/post-transactiontransfer"
+					]
+				},
+				{
+					"group": "Retailer",
+					"pages": [
+						"api-reference/retailer/get-retailerme",
+						"api-reference/retailer/retrieve-multiple-retailerentities",
+						"api-reference/retailer/create-a-single-retailerentity",
+						"api-reference/retailer/retrieve-a-single-retailerentity",
+						"api-reference/retailer/update-a-single-retailerentity",
+						"api-reference/retailer/get-retailer-sale"
+					]
+				},
+				{
+					"group": "ReferralCampaign",
+					"pages": [
+						"api-reference/referralcampaign/retrieve-multiple-referralcampaignentities",
+						"api-reference/referralcampaign/create-a-single-referralcampaignentity",
+						"api-reference/referralcampaign/update-a-single-referralcampaignentity"
+					]
+				},
+				{
+					"group": "Sales Representative",
+					"pages": [
+						"api-reference/sales-representative/retrieve-multiple-salesrepentities",
+						"api-reference/sales-representative/create-a-single-salesrepentity",
+						"api-reference/sales-representative/update-a-single-salesrepentity"
+					]
+				},
+				{
+					"group": "Objective",
+					"pages": [
+						"api-reference/objective/get-objectiveretailersme",
+						"api-reference/objective/get-objectiveretailers",
+						"api-reference/objective/post-objectiveretailers",
+						"api-reference/objective/delete-objective",
+						"api-reference/objective/patch-objective"
+					]
+				},
+				{
+					"group": "Auth",
+					"pages": [
+						"api-reference/auth/post-authsignup",
+						"api-reference/auth/post-authconfirm",
+						"api-reference/auth/post-authresend-confirmation",
+						"api-reference/auth/delete-authme",
+						"api-reference/auth/post-authlogin",
+						"api-reference/auth/get-authloginsessions",
+						"api-reference/auth/post-authtoken",
+						"api-reference/auth/post-authlogin-challenge",
+						"api-reference/auth/post-authnew-password-required-challenge",
+						"api-reference/auth/post-authforgot-password",
+						"api-reference/auth/post-authforgot-challenge",
+						"api-reference/auth/post-authchange-password",
+						"api-reference/auth/post-authglobal-sign-out",
+						"api-reference/auth/post-authpreferences",
+						"api-reference/auth/post-authpreferencesverify-phone",
+						"api-reference/auth/post-authadminreset-password"
+					]
+				},
+				{
+					"group": "Sales",
+					"pages": ["api-reference/sales/get-sale"]
+				},
+				{
+					"group": "Game",
+					"pages": [
+						"api-reference/game/get-game-participation-cost",
+						"api-reference/game/get-game-configuration",
+						"api-reference/game/patch-game-configuration",
+						"api-reference/game/get-gamedrawexecute",
+						"api-reference/game/get-game-drawresults",
+						"api-reference/game/get-game-draws",
+						"api-reference/game/get-gamefuturedraw",
+						"api-reference/game/get-game-drawnext",
+						"api-reference/game/get-game-extra-stats",
+						"api-reference/game/get-gamedrawsaccount",
+						"api-reference/game/post-participation",
+						"api-reference/game/post-participationfree",
+						"api-reference/game/post-participationreserve-combination",
+						"api-reference/game/get-participation-info",
+						"api-reference/game/retrieve-multiple-participationcombinationentities"
+					]
+				},
+				{
+					"group": "FreeParticipation",
+					"pages": [
+						"api-reference/freeparticipation/retrieve-multiple-freeparticipationentities",
+						"api-reference/freeparticipation/create-a-single-freeparticipationentity",
+						"api-reference/freeparticipation/update-a-single-freeparticipationentity",
+						"api-reference/freeparticipation/post-free-participationverify"
+					]
+				},
+				{
+					"group": "Report",
+					"pages": [
+						"api-reference/report/get-reportinfo",
+						"api-reference/report/get-reportdownload",
+						"api-reference/report/post-reportgenerate",
+						"api-reference/report/post-reportapprove",
+						"api-reference/report/get-reportretailers",
+						"api-reference/report/get-reportretailersme",
+						"api-reference/report/get-reportretailers-1",
+						"api-reference/report/get-reportaffiliates",
+						"api-reference/report/get-reportaffiliatesme",
+						"api-reference/report/get-reportaffiliates-1",
+						"api-reference/report/get-reportsales-representatives",
+						"api-reference/report/get-reportsales-representativesme",
+						"api-reference/report/get-reportsales-representatives-1",
+						"api-reference/report/get-reportcampaign",
+						"api-reference/report/retrieve-multiple-reportentities",
+						"api-reference/report/get-dashboard",
+						"api-reference/report/get-dashboardadmin"
+					]
+				},
+				{
+					"group": "Worker",
+					"pages": [
+						"api-reference/worker/get-schedulingstatus",
+						"api-reference/worker/post-schedulingjob",
+						"api-reference/worker/delete-schedulingjob",
+						"api-reference/worker/post-schedulingdraws",
+						"api-reference/worker/delete-schedulingdraws",
+						"api-reference/worker/post-schedulinggenerators",
+						"api-reference/worker/delete-schedulinggenerators"
+					]
+				}
+			]
+		}
+	],
+	"footerSocials": {
+		"twitter": "https://www.twitter.com/BluballGames",
+		"instagram": "https://www.instagram.com/bluballgames/",
+		"youtube": "https://www.youtube.com/@BluballGames"
+	}
+}
